@@ -1,6 +1,5 @@
 from langchain_community.vectorstores import FAISS
 from langchain.chains import ConversationalRetrievalChain
-#from langchain_openai import OpenAIEmbeddings
 from langchain_community.embeddings import BedrockEmbeddings
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.runnables.history import RunnableWithMessageHistory
@@ -19,12 +18,19 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
 import streamlit as st
 
+aws_access_key_id = st.secrets["aws_access_key_id"]
+aws_secret_access_key = st.secrets["aws_secret_access_key"]
+
+boto_session = boto3.session.Session(
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key)
+
 st.set_page_config(page_title="RAG Demo")
 st.title("국가공무원 복무규정")
 st.caption("🚀 A streamlit chatbot powered by AWS Bedrock Claude LLM")
 
 #모델-config
-bedrock_runtime = boto3.client(
+bedrock_runtime = boto_session.client(
     service_name="bedrock-runtime",
     region_name="us-east-1",
 )
@@ -108,8 +114,8 @@ conversational_rag_chain = RunnableWithMessageHistory(
     output_messages_key="answer",
 )
 
-# 화면에 history를 display 하기 위해서
-# session_id = 123: 세션이 여러 개일 경우 구분하기 위해서
+
+# session_id = 123
 history = get_session_history("123")
 for msg in history.messages:
     st.chat_message(msg.type).write(msg.content)
