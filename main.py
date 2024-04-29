@@ -17,6 +17,7 @@ from langchain_community.chat_models import BedrockChat
 #from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
 import streamlit as st
+import time
 
 aws_access_key_id = st.secrets["aws_access_key_id"]
 aws_secret_access_key = st.secrets["aws_secret_access_key"]
