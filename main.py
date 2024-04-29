@@ -120,10 +120,9 @@ history = get_session_history("123")
 for msg in history.messages:
     st.chat_message(msg.type).write(msg.content)
 
-
 if prompt := st.chat_input():
     st.chat_message("human").write(prompt)
-    config = {"configurable": {"session_id": "any"}}
-    response = conversational_rag_chain.invoke({"input": prompt}, config)["answer"]
     with st.spinner("답변 생성중입니다..."):
+        config = {"configurable": {"session_id": "any"}}
+        response = conversational_rag_chain.invoke({"input": prompt}, config)["answer"]
         st.chat_message("ai").write(response)
