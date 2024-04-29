@@ -18,8 +18,6 @@ from langchain_community.chat_models import BedrockChat
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
 import streamlit as st
-from dotenv import load_dotenv
-load_dotenv()
 
 st.set_page_config(page_title="RAG Demo")
 st.title("국가공무원 복무규정")
