@@ -134,7 +134,7 @@ if prompt := st.chat_input():
     #response = conversational_rag_chain.invoke({"input": prompt}, config)["answer"]
         #source_documents = response['source_documents']
         #st.chat_message("ai").write(response)    
-    st.chat_message("ai").write_stream( get_response(conversational_rag_chain, prompt, config))
+    st.chat_message("ai").write_stream(get_response(conversational_rag_chain, prompt, config))
         #with st.expander("참고 문서 확인"):
             #st.markdown(source_documents.metadata['source'], help = source_documents.page_content) 
             #st.chat_message("ai").write_stream(response_generator(response))
