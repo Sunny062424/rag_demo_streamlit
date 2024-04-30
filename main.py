@@ -116,14 +116,14 @@ conversational_rag_chain = RunnableWithMessageHistory(
     history_messages_key="chat_history",
     output_messages_key="answer",
 )
+#stream effect
+# def response_generator(response):
+#     stream = []
+#     stream.append(response) 
 
-def response_generator(response):
-    stream = []
-    stream.append(response) 
-
-    for word in stream[0].split():
-        yield word + " "
-        time.sleep(0.05)
+#     for word in stream[0].split():
+#         yield word + " "
+#         time.sleep(0.05)
 
 # session_id = 123
 history = get_session_history("123")
@@ -132,7 +132,7 @@ for msg in history.messages:
 
 if prompt := st.chat_input():
     st.chat_message("human").write(prompt)
-    config = {"configurable": {"session_id": "any"}}
-    response = conversational_rag_chain.invoke({"input": prompt}, config)["answer"]
-        #st.chat_message("ai").write(response)
-    st.chat_message("ai").write_stream(response_generator(response))
+    with st.spinner("답변 생성중입니다..."):
+        config = {"configurable": {"session_id": "any"}}
+        response = conversational_rag_chain.invoke({"input": prompt}, config)["answer"]
+        st.chat_message("ai").write(response)
