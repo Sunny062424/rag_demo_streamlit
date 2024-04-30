@@ -85,8 +85,8 @@ history_aware_retriever = create_history_aware_retriever(
 ### Answer question ###
 qa_system_prompt = """You are an assistant for question-answering tasks. \
 Use the following pieces of retrieved context to answer the question. \
-If you don't know the answer, just say that you don't know. \
-
+If you don't know the answer, just say just say "복무규정에 없는 내용입니다. 다시 질문해주세요." \
+Answer correctly using given context. \
 {context}"""
 qa_prompt = ChatPromptTemplate.from_messages(
     [
