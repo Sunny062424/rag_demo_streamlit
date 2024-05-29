@@ -6,4 +6,4 @@ openai
 boto3
 langchain-aws
 langchainhub
-
+langchain-community
