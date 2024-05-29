@@ -1,6 +1,6 @@
 from langchain_community.vectorstores import FAISS
 from langchain.chains import ConversationalRetrievalChain
-from langchain_community.embeddings import BedrockEmbeddings
+from langchain_aws.embeddings import BedrockEmbeddings
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.runnables.history import RunnableWithMessageHistory
 
@@ -13,7 +13,7 @@ from langchain_community.chat_message_histories import (
 
 # Claude
 import boto3
-from langchain_community.chat_models import BedrockChat
+from langchain_aws import ChatBedrock
 #from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
 import streamlit as st
@@ -45,7 +45,7 @@ model_kwargs =  {
     "stop_sequences": ["\n\nHuman"],
 }
 
-llm = BedrockChat(
+llm = ChatBedrock(
     client=bedrock_runtime,
     model_id=model_id,
     model_kwargs=model_kwargs,
